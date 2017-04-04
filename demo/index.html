@@ -149,11 +149,21 @@
 
     <demo-snippet>
       <template is="dom-bind">
-      <autocomplete-example>
-        <!-- autocomplete-example is used just to do paper-autocomplete.source = states; -->
+
         <paper-autocomplete label="Select State" id="input-local" no-label-float="true"></paper-autocomplete>
-      </autocomplete-example>
-    </template>
+
+        <script>
+          window.addEventListener('WebComponentsReady', function () {
+            Polymer.Base.async(function () {
+
+              // The wrapping event listener and Polymer.async call is only needed to make the demo compatible with
+              // IE11/Edge. This is not needed when using the component, it is an issue with <demo-snippet>
+              // Ref: https://github.com/PolymerElements/iron-demo-helpers/pull/46
+              document.getElementById('input-local').source = states;
+            });
+          });
+        </script>
+      </template>
     </demo-snippet>
 
     <demo-snippet>
